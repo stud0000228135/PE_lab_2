@@ -23,4 +23,4 @@ async def translate(request: TranslationRequest):
         translated_text = translator(request.text)[0].get('translation_text')
         return {"translation": translated_text}
     except Exception as e:
-        raise HTTPException(status_code=500, detail="Internal Server Error")
+        raise HTTPException(status_code=400, detail="Bad Request")
