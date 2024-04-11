@@ -1,11 +1,8 @@
-from pyexpat import model
 import streamlit as st
-from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
+from transformers import pipeline, AutoTokenizer
 
-# Загрузка модели для машинного перевода
+# Загрузка модели и токенизатора для машинного перевода
 translator = pipeline("translation", model="Helsinki-NLP/opus-mt-ru-en")
-
-# Загрузка токенизатора для машинного перевода
 tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-ru-en")
 
 # Стартовая страница Streamlit
@@ -16,5 +13,5 @@ user_text = st.text_area("Введите текст:")
 
 # Элемент управления для машинного перевода
 if st.button("Перевести текст"):
-    x = translator(user_text)[0].get('translation_text')
-    st.write(f"Результат перевода: {x}")
+    translated_text = translator(user_text)[0].get('translation_text')
+    st.write(f"Результат перевода: {translated_text}")
